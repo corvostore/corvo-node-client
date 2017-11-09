@@ -1,0 +1,34 @@
+{
+  "name": "corvo-node-client",
+  "version": "1.0.0",
+  "description": "A node.js client for CorvoStore.",
+  "main": "index.js",
+  "scripts": {
+    "test": "babel-node node_modules/.bin/jasmine",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corvostore/corvo-node-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/corvostore/corvo-node-client/issues"
+  },
+  "dependencies": {
+    "babel-plugin-transform-builtin-extend": "^1.1.2",
+    "morgan": "^1.9.0",
+    "rimraf": "^2.6.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "jasmine": "^2.8.0",
+    "jasmine-node": "^1.14.5",
+    "rimraf": "^2.6.2"
+  }
+}
