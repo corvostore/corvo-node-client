@@ -14,7 +14,7 @@ describe("first test", () => {
   // });
 
   it("write test for client set command", () => {
-    client.set(null, null).then((response) => {
+    client.set("mykey", "myval").then((response) => {
       expect(response).toBe("+OK\r\n");
     });
   });

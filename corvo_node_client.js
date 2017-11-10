@@ -1,5 +1,6 @@
 import Net from 'net';
 import Encoder from './encoder.js';
+import Decoder from './decoder.js';
 
 class CorvoNodeClient {
   constructor() {
@@ -32,7 +33,7 @@ class CorvoNodeClient {
   }
 
   async set(key, val) {
-    const message = Encoder.encode(key, val);
+    const message = Encoder.encode("SET", key, val);
     const writeDone = await this.writeToServer(message);
     const returnVal = await this.resolveOnData();
 
