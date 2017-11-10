@@ -36,8 +36,11 @@ class CorvoNodeClient {
     const writeDone = await this.writeToServer(message);
     const returnVal = await this.resolveOnData();
 
-    this.client.destroy();
     return returnVal;
+  }
+
+  destroyClient() {
+    this.client.destroy();
   }
 }
 
