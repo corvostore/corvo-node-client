@@ -19,13 +19,14 @@ class CorvoNodeClient {
   resolveOnData() {
     return new Promise(resolve => {
       this.client.on('data', function(data) {
-        resolve(data);
+        resolve(Decoder.decode(data));
       });
     });
   }
 
-  writeToServer(message) {
+  writeToServer(command, ...restOfParams) {
     return new Promise(resolve => {
+      const message = Encoder.encode(command, ...restOfParams);
       this.client.write(message, function(data) {
         resolve(1);
       });
@@ -33,105 +34,92 @@ class CorvoNodeClient {
   }
 
   async set(key, val) {
-    const message = Encoder.encode("SET", key, val);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("SET", key, val);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async hvals(key) {
-    const message = Encoder.encode("HVALS", key);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("HVALS", key);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async hstrlen(key, field) {
-    const message = Encoder.encode("HSTRLEN", key, field);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("HSTRLEN", key, field);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async hmset(key, field, value, ...moreParams) {
-    const message = Encoder.encode("HMSET", key, field, value, ...moreParams);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("HMSET", key, field, value, ...moreParams);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async hdel(key, field, ...moreFields) {
-    const message = Encoder.encode("HDEL", key, field, ...moreFields);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("HDEL", key, field, ...moreFields);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async hget(key, field) {
-    const message = Encoder.encode("HGET", key, field);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("HGET", key, field);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async hgetall(key) {
-    const message = Encoder.encode("HGETALL", key);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("HGETALL", key);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async hlen(key) {
-    const message = Encoder.encode("HLEN", key);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("HLEN", key);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async hsetnx(key, field, value) {
-    const message = Encoder.encode("HSETNX", key, field, value);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("HSETNX", key, field, value);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async hmget(key, field, ...moreFields) {
-    const message = Encoder.encode("HMGET", key, field, ...moreFields);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("HMGET", key, field, ...moreFields);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async hincrby(key, field, increment) {
-    const message = Encoder.encode("HINCRBY", key, field, increment);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("HINCRBY", key, field, increment);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async hkeys(key) {
-    const message = Encoder.encode("HKEYS", key);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("HKEYS", key);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   //----
-  async hset(keys) {
-    const message = Encoder.encode("HSET", keys);
-    const writeDone = await this.writeToServer(message);
+  async hset(...keys) {
+    const writeDone = await this.writeToServer("HSET", ...keys);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
