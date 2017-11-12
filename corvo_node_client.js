@@ -19,111 +19,103 @@ class CorvoNodeClient {
   resolveOnData() {
     return new Promise(resolve => {
       this.client.on('data', function(data) {
-        resolve(data);
+        resolve(Decoder.decode(data));
       });
     });
   }
 
-  writeToServer(message) {
+  writeToServer(tokens) {
     return new Promise(resolve => {
+      const message = Encoder.encode(...tokens);
       this.client.write(message, function(data) {
         resolve(1);
       });
     });
   }
 
-  async set(key, val) {
-    const message = Encoder.encode("SET", key, val);
-    const writeDone = await this.writeToServer(message);
+  async set(...tokens) {
+    const allTokens = ['SET'].concat(tokens);
+    const writeDone = await this.writeToServer(allTokens);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
-  async del(keys) {
-    const message = Encoder.encode("DEL", keys);
-    const writeDone = await this.writeToServer(message);
+  async del(...tokens) {
+    const allTokens = ['DEL'].concat(tokens);
+    const writeDone = await this.writeToServer(allTokens);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
-  async lpush(...keys) {
-    const message = Encoder.encode("LPUSH", ...keys);
-    const writeDone = await this.writeToServer(message);
+  async hkeys(key) {
+    const writeDone = await this.writeToServer("HKEYS", key);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
-  async hset(keys) {
-    const message = Encoder.encode("HSET", keys);
-    const writeDone = await this.writeToServer(message);
+  async lpush(...tokens) {
+    const allTokens = ['LPUSH'].concat(tokens);
+    const writeDone = await this.writeToServer(...allTokens);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async lindex(key, index) {
-    index = index.toString();
-    const message = Encoder.encode("LINDEX", key, index);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("LINDEX", key, index);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async lrem(key, count, value) {
-    const message = Encoder.encode("LREM", key, index);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("LREM", key, count, value);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   };
 
   async llen(key, count, value) {
-    const message = Encoder.encode("LREM", key, index);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("LREM", key, index);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   };
 
-  async linsert(key, flag, pivot, value) {
-    const message = Encoder.encode("LINSERT", key, flag, pivot, value);
-    const writeDone = await this.writeToServer(message);
+  async linsert(key, flag, pivot, value) {);
+    const writeDone = await this.writeToServer("LINSERT", key, flag, pivot, value);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async rpush(...keys) {
-    const message = Encoder.encode("RPUSH", ...keys);
-    const writeDone = await this.writeToServer(message);
+    const allTokens = ["RPUSH"].concat(keys);
+    const writeDone = await this.writeToServer(allTokens);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async lpop(key) {
-    const message = Encoder.encode("LPOP", key);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("LPOP", key);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async rpop(key) {
-    const message = Encoder.encode("RPOP", key);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("RPOP", key);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
   }
 
   async lset(key, index, val) {
-    const message = Encoder.encode("LSET", key, index, val);
-    const writeDone = await this.writeToServer(message);
+    const writeDone = await this.writeToServer("LSET", key, index, val);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
