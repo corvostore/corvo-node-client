@@ -232,6 +232,12 @@ class CorvoNodeClient {
     return returnVal;
   }
 
+  async hset(key, field, value) {
+    const writeDone = await this.writeToServer("HSET", key, field, value);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
   destroyClient() {
     this.client.destroy();
   }
