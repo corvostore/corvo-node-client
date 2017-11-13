@@ -42,7 +42,6 @@ client.hset("key1", "field1", "value1").then((response) => {
   return client.hdel("key1", "no-such-field-1");
 
 }).then((response) => {
-  console.log("hdel : ", response);
   console.log(response === 0);
 }).then(() => {
 
@@ -50,7 +49,6 @@ client.hset("key1", "field1", "value1").then((response) => {
   return client.hdel("key1", "field1", "no-such-field-2", "field2");
 
 }).then((response) => {
-  console.log("hdel : ", response);
   console.log(response === 2);
 }).then(() => {
 
@@ -69,18 +67,10 @@ client.hset("key1", "field1", "value1").then((response) => {
 }).then(() => {
 
   // test hget, for a field with string value
-  return client.hget("key1", "field2");
+  return client.hget("key1", "field-longer3");
 
 }).then((response) => {
-  console.log(response === "value2");
-
-
-
-
-
-
-
-
+  console.log(response === "value-longer3");
   console.log("Application ended");
   client.destroyClient();
 });
