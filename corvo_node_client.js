@@ -99,16 +99,16 @@ class CorvoNodeClient {
     const returnVal = await this.resolveOnData();
 
     return returnVal;
-  };
+  }
 
   async llen(key, count, value) {
     const writeDone = await this.writeToServer("LREM", key, index);
     const returnVal = await this.resolveOnData();
 
     return returnVal;
-  };
+  }
 
-  async linsert(key, flag, pivot, value) {);
+  async linsert(key, flag, pivot, value) {
     const writeDone = await this.writeToServer("LINSERT", key, flag, pivot, value);
     const returnVal = await this.resolveOnData();
 
