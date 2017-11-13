@@ -18,7 +18,7 @@ class CorvoNodeClient {
 
   resolveOnData() {
     return new Promise(resolve => {
-      this.client.on('data', function(data) {
+      this.client.once('data', function(data) {
         resolve(Decoder.decode(data));
       });
     });
