@@ -33,6 +33,12 @@ class CorvoNodeClient {
     });
   }
 
+  async hset(key, field, val) {
+    const writeDone = await this.writeToServer("HSET", key, field, val);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
   async get(key) {
     const writeDone = await this.writeToServer("GET", key);
     const returnVal = await this.resolveOnData();
@@ -87,8 +93,8 @@ class CorvoNodeClient {
     return returnVal;
   }
 
-  async llen(key, count, value) {
-    const writeDone = await this.writeToServer("LREM", key, index);
+  async llen(key) {
+    const writeDone = await this.writeToServer("LLEN", key);
     const returnVal = await this.resolveOnData();
     return returnVal;
   }
@@ -100,7 +106,7 @@ class CorvoNodeClient {
     return returnVal;
   }
 
-  async rpush(...keys) {
+  async rpush(...tokens) {
     const writeDone = await this.writeToServer('RPUSH', ...tokens);
     const returnVal = await this.resolveOnData();
     return returnVal;
