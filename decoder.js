@@ -14,7 +14,8 @@ class Decoder {
     } else if (respString[0] === "+") {
       return respString.slice(1, respString.length - 2);
     } else if (respString[0] === "-") {
-      // handle error (raise error)
+      // modify to handle error, currently just returning as string
+      return respString.slice(1, respString.length - 2);
     } else if (respString[0] === ":") {
       return parseInt(respString.slice(1, respString.length - 2), 10);
     } else if (respString[0] === "*") {

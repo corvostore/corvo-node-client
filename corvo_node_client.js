@@ -186,6 +186,83 @@ class CorvoNodeClient {
     return returnVal;
   }
 
+  async hvals(key) {
+    const writeDone = await this.writeToServer("HVALS", key);
+    const returnVal = await this.resolveOnData();
+
+    return returnVal;
+  }
+
+  async hstrlen(key, field) {
+    const writeDone = await this.writeToServer("HSTRLEN", key, field);
+    const returnVal = await this.resolveOnData();
+
+    return returnVal;
+  }
+
+  async hmset(key, field, value, ...moreParams) {
+    const writeDone = await this.writeToServer("HMSET", key, field, value, ...moreParams);
+    const returnVal = await this.resolveOnData();
+
+    return returnVal;
+  }
+
+  async hdel(key, field, ...moreFields) {
+    const writeDone = await this.writeToServer("HDEL", key, field, ...moreFields);
+    const returnVal = await this.resolveOnData();
+
+    return returnVal;
+  }
+
+  async hget(key, field) {
+    const writeDone = await this.writeToServer("HGET", key, field);
+    const returnVal = await this.resolveOnData();
+
+    return returnVal;
+  }
+
+  async hgetall(key) {
+    const writeDone = await this.writeToServer("HGETALL", key);
+    const returnVal = await this.resolveOnData();
+
+    return returnVal;
+  }
+
+  async hlen(key) {
+    const writeDone = await this.writeToServer("HLEN", key);
+    const returnVal = await this.resolveOnData();
+
+    return returnVal;
+  }
+
+  async hsetnx(key, field, value) {
+    const writeDone = await this.writeToServer("HSETNX", key, field, value);
+    const returnVal = await this.resolveOnData();
+
+    return returnVal;
+  }
+
+  async hmget(key, field, ...moreFields) {
+    const writeDone = await this.writeToServer("HMGET", key, field, ...moreFields);
+    const returnVal = await this.resolveOnData();
+
+    return returnVal;
+  }
+
+  async hincrby(key, field, increment) {
+    const writeDone = await this.writeToServer("HINCRBY", key, field, increment);
+    const returnVal = await this.resolveOnData();
+
+    return returnVal;
+  }
+
+  async hkeys(key) {
+    const writeDone = await this.writeToServer("HKEYS", key);
+    const returnVal = await this.resolveOnData();
+
+    return returnVal;
+  }
+
   destroyClient() {
     this.client.destroy();
   }
