@@ -24,7 +24,7 @@ class CorvoNodeClient {
     });
   }
 
-  writeToServer(tokens) {
+  writeToServer(...tokens) {
     return new Promise(resolve => {
       const message = Encoder.encode(...tokens);
       this.client.write(message, function(data) {
@@ -37,7 +37,30 @@ class CorvoNodeClient {
     const allTokens = ['SET'].concat(tokens);
     const writeDone = await this.writeToServer(allTokens);
     const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
 
+  async get(key) {
+    const writeDone = await this.writeToServer("GET", key);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async set(key, val, ...flags) {
+    const writeDone = await this.writeToServer("SET", key, val, ...flags);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async append(key, val) {
+    const writeDone = await this.writeToServer("APPEND", key, val);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async strlen(key) {
+    const writeDone = await this.writeToServer("STRLEN", key);
+    const returnVal = await this.resolveOnData();
     return returnVal;
   }
 
@@ -119,7 +142,49 @@ class CorvoNodeClient {
     const returnVal = await this.resolveOnData();
 
     return returnVal;
-  };
+  }
+
+  async touch(...keys) {
+    const writeDone = await this.writeToServer("TOUCH", ...keys);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async incr(key) {
+    const writeDone = await this.writeToServer("INCR", key);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async decr(key) {
+    const writeDone = await this.writeToServer("DECR", key);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async exists(...keys) {
+    const writeDone = await this.writeToServer("EXISTS", ...keys);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async rename(key, newKey) {
+    const writeDone = await this.writeToServer("RENAME", key, newKey);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async renamenx(key, newKey) {
+    const writeDone = await this.writeToServer("RENAMENX", key, newKey);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async type(key) {
+    const writeDone = await this.writeToServer("TYPE", key);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
 
   destroyClient() {
     this.client.destroy();
