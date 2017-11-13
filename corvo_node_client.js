@@ -33,13 +33,6 @@ class CorvoNodeClient {
     });
   }
 
-  async set(...tokens) {
-    const allTokens = ['SET'].concat(tokens);
-    const writeDone = await this.writeToServer(allTokens);
-    const returnVal = await this.resolveOnData();
-    return returnVal;
-  }
-
   async get(key) {
     const writeDone = await this.writeToServer("GET", key);
     const returnVal = await this.resolveOnData();
@@ -65,46 +58,38 @@ class CorvoNodeClient {
   }
 
   async del(...tokens) {
-    const allTokens = ['DEL'].concat(tokens);
-    const writeDone = await this.writeToServer(allTokens);
+    const writeDone = await this.writeToServer('DEL', ...tokens);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async hkeys(key) {
     const writeDone = await this.writeToServer("HKEYS", key);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async lpush(...tokens) {
-    const allTokens = ['LPUSH'].concat(tokens);
-    const writeDone = await this.writeToServer(...allTokens);
+    const writeDone = await this.writeToServer('LPUSH', ...tokens);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async lindex(key, index) {
     const writeDone = await this.writeToServer("LINDEX", key, index);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async lrem(key, count, value) {
     const writeDone = await this.writeToServer("LREM", key, count, value);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async llen(key, count, value) {
     const writeDone = await this.writeToServer("LREM", key, index);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
@@ -116,31 +101,26 @@ class CorvoNodeClient {
   }
 
   async rpush(...keys) {
-    const allTokens = ["RPUSH"].concat(keys);
-    const writeDone = await this.writeToServer(allTokens);
+    const writeDone = await this.writeToServer('RPUSH', ...tokens);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async lpop(key) {
     const writeDone = await this.writeToServer("LPOP", key);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async rpop(key) {
     const writeDone = await this.writeToServer("RPOP", key);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async lset(key, index, val) {
     const writeDone = await this.writeToServer("LSET", key, index, val);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
@@ -189,77 +169,66 @@ class CorvoNodeClient {
   async hvals(key) {
     const writeDone = await this.writeToServer("HVALS", key);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async hstrlen(key, field) {
     const writeDone = await this.writeToServer("HSTRLEN", key, field);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async hmset(key, field, value, ...moreParams) {
     const writeDone = await this.writeToServer("HMSET", key, field, value, ...moreParams);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async hdel(key, field, ...moreFields) {
     const writeDone = await this.writeToServer("HDEL", key, field, ...moreFields);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async hget(key, field) {
     const writeDone = await this.writeToServer("HGET", key, field);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async hgetall(key) {
     const writeDone = await this.writeToServer("HGETALL", key);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async hlen(key) {
     const writeDone = await this.writeToServer("HLEN", key);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async hsetnx(key, field, value) {
     const writeDone = await this.writeToServer("HSETNX", key, field, value);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async hmget(key, field, ...moreFields) {
     const writeDone = await this.writeToServer("HMGET", key, field, ...moreFields);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async hincrby(key, field, increment) {
     const writeDone = await this.writeToServer("HINCRBY", key, field, increment);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
   async hkeys(key) {
     const writeDone = await this.writeToServer("HKEYS", key);
     const returnVal = await this.resolveOnData();
-
     return returnVal;
   }
 
