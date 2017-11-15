@@ -244,6 +244,18 @@ class CorvoNodeClient {
     return returnVal;
   }
 
+  async zincrby(key, increment, member) {
+    const writeDone = await this.writeToServer("ZINCRBY", key, increment, member);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async zscore(key, member) {
+    const writeDone = await this.writeToServer("ZSCORE", key, member);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
   destroyClient() {
     this.client.destroy();
   }
