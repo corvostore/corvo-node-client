@@ -250,8 +250,26 @@ class CorvoNodeClient {
     return returnVal;
   }
 
+  async zadd(key, ...moreParams) {
+    const writeDone = await this.writeToServer("ZADD", key, ...moreParams);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
   async zscore(key, member) {
     const writeDone = await this.writeToServer("ZSCORE", key, member);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async zrem(key, ...members) {
+    const writeDone = await this.writeToServer("ZREM", key, ...members);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async zcard(key) {
+    const writeDone = await this.writeToServer("ZCARD", key);
     const returnVal = await this.resolveOnData();
     return returnVal;
   }
