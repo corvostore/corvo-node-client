@@ -69,12 +69,6 @@ class CorvoNodeClient {
     return returnVal;
   }
 
-  async hkeys(key) {
-    const writeDone = await this.writeToServer("HKEYS", key);
-    const returnVal = await this.resolveOnData();
-    return returnVal;
-  }
-
   async lpush(...tokens) {
     const writeDone = await this.writeToServer('LPUSH', ...tokens);
     const returnVal = await this.resolveOnData();
@@ -240,6 +234,18 @@ class CorvoNodeClient {
 
   async hset(key, field, value) {
     const writeDone = await this.writeToServer("HSET", key, field, value);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async zinterstore(dest, numkeys, ...restOfParams) {
+    const writeDone = await this.writeToServer("ZINTERSTORE", dest, numkeys, ...restOfParams);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async zunionstore(dest, numkeys, ...restOfParams) {
+    const writeDone = await this.writeToServer("ZUNIONSTORE", dest, numkeys, ...restOfParams);
     const returnVal = await this.resolveOnData();
     return returnVal;
   }
