@@ -280,6 +280,78 @@ class CorvoNodeClient {
     return returnVal;
   }
 
+  async sadd(key, ...members) {
+    const writeDone = await this.writeToServer("SADD", key, ...members);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async scard(key) {
+    const writeDone = await this.writeToServer("SCARD", key);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async sismember(key, member) {
+    const writeDone = await this.writeToServer("SISMEMBER", key, member);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async spop(key, count) {
+    const writeDone = await this.writeToServer("SPOP", key, count);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async srem(key, ...members) {
+    const writeDone = await this.writeToServer("SREM", ...members);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async smembers(key) {
+    const writeDone = await this.writeToServer("SMEMBERS", key);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async sunion(...keys) {
+    const writeDone = await this.writeToServer("SMEMBERS", key);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async sinter(...keys) {
+    const writeDone = await this.writeToServer("SINTER", ...keys);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async sdiff(...keys) {
+    const writeDone = await this.writeToServer("SDIFF", ...keys);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async sunionstore(destination, ...keys) {
+    const writeDone = await this.writeToServer("SUNIONSTORE", destination, ...keys);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async sinterstore(destination, ...keys) {
+    const writeDone = await this.writeToServer("SINTERSTORE", destination, ...keys);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
+  async sdiffstore(destination, ...keys) {
+    const writeDone = await this.writeToServer("SDIFFSTORE", destination, ...keys);
+    const returnVal = await this.resolveOnData();
+    return returnVal;
+  }
+
   destroyClient() {
     this.client.destroy();
   }
